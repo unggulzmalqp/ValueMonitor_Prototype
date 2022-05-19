@@ -341,15 +341,15 @@ def print_sample_articles_topic(df_with_topics, dict_anchor_words, topics, selec
                     print("")
         print("")
     
-def import_topic_model(file_name, Import_existing_model, df, number_of_words_per_topic):
+def import_topic_model(combined_STOA_technologies_saved_topic_model, Import_existing_model, df, number_of_words_per_topic):
     
     if Import_existing_model == True:
     
-        root = os.getcwd()
+        #root = os.getcwd()
         #root = 'F:/Google Drive/Topic_modelling_analysis/'   # remove this after!!!
-        name, extension = os.path.splitext(file_name)
+        #name, extension = os.path.splitext(file_name)
         
-        imported_data = cPickle.load(open(str(root) + "/data/" + str(name) + "_saved_topic_model", 'rb'))
+        imported_data = combined_STOA_technologies_saved_topic_model
         model_and_vectorized_data = imported_data[0]
         df_with_topics = create_df_with_topics(df, model_and_vectorized_data[0], model_and_vectorized_data[1], imported_data[2])
         topics = report_topics(model_and_vectorized_data[0], imported_data[1], number_of_words_per_topic)
