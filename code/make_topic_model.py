@@ -329,7 +329,7 @@ def import_topic_model(combined_STOA_technologies_saved_topic_model, Import_exis
         imported_data = combined_STOA_technologies_saved_topic_model
         model_and_vectorized_data = imported_data[0]
         df_with_topics = create_df_with_topics(df, model_and_vectorized_data[0], model_and_vectorized_data[1], imported_data[2])
-        topics = report_topics(model_and_vectorized_data[0], imported_data[1], number_of_words_per_topic)
+        topics = imported_data [3]
         dict_anchor_words = imported_data[1]
 
         results_import = [df_with_topics, topics, dict_anchor_words]
