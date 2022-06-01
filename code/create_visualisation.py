@@ -67,43 +67,43 @@ def values_in_different_datasets(df_with_topics, selected_technology, dict_ancho
     print("Number articles TECH: "+str(len(df_with_topics_TECH)))
 
 
-def values_in_different_groups(df_with_topics, dict_anchor_words, list_datasets):
+def values_in_different_groups(df_with_topics, dict_anchor_words, selected_dataset):
     
-    for selected_dataset in list_datasets:
+    
         
-        df_with_topics_field = df_with_topics.loc[df_with_topics['dataset'] == selected_dataset]
-        
-
-        
-        df_sum_dataset_short = df_with_topics_field.sum(numeric_only=True)
-        
-
-        df_sum_dataset_short = df_sum_dataset_short.drop(['IoT', 'AI'])
+    df_with_topics_field = df_with_topics.loc[df_with_topics['dataset'] == selected_dataset]
         
 
         
-        series_perc_dataset_short = df_sum_dataset_short.apply(lambda x: x / len(df_with_topics_field) * 100)
-        series_perc_dataset_short = series_perc_dataset_short[:len(dict_anchor_words)]
+    df_sum_dataset_short = df_with_topics_field.sum(numeric_only=True)
+        
 
-        counter = 0
-        for value, keywords in dict_anchor_words.items():
-            series_perc_dataset_short = series_perc_dataset_short.rename({counter: value})
-            counter = counter + 1
+    df_sum_dataset_short = df_sum_dataset_short.drop(['IoT', 'AI'])
         
-        series_perc_dataset_short = series_perc_dataset_short.sort_values(ascending = False)
-        
-        series_perc_dataset_short = series_perc_dataset_short.rename(selected_dataset)
-        df_perc_dataset_short = series_perc_dataset_short.to_frame()
 
         
-        c = {"NEWS": "#1f77b4", "ETHICS": "#ff7f0e", "TECH": "#2ca02c"}
+    series_perc_dataset_short = df_sum_dataset_short.apply(lambda x: x / len(df_with_topics_field) * 100)
+    series_perc_dataset_short = series_perc_dataset_short[:len(dict_anchor_words)]
+
+    counter = 0
+    for value, keywords in dict_anchor_words.items():
+        series_perc_dataset_short = series_perc_dataset_short.rename({counter: value})
+        counter = counter + 1
         
-        plt.rcParams.update({'font.size': 16})
-        ax = df_perc_dataset_short.plot(kind='barh', figsize=(10,10),
+    series_perc_dataset_short = series_perc_dataset_short.sort_values(ascending = False)
+        
+    series_perc_dataset_short = series_perc_dataset_short.rename(selected_dataset)
+    df_perc_dataset_short = series_perc_dataset_short.to_frame()
+
+        
+    c = {"NEWS": "#1f77b4", "ETHICS": "#ff7f0e", "TECH": "#2ca02c"}
+        
+    plt.rcParams.update({'font.size': 16})
+    ax = df_perc_dataset_short.plot(kind='barh', figsize=(10,10),
                                         color=c)
-        ax.set_xlabel("%")
-        plt.title("Distribution of values")
-        plt.gca().invert_yaxis()
+    ax.set_xlabel("%")
+    plt.title("Distribution of values")
+    plt.gca().invert_yaxis()
 
 def topic_int_or_string(Topic_selected, dict_anchor_words):
     
