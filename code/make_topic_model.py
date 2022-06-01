@@ -322,16 +322,14 @@ def print_sample_articles_topic(df_with_topics, dict_anchor_words, topics, selec
                     print("")
         print("")
     
-def import_topic_model(combined_STOA_technologies_saved_topic_model, Import_existing_model, df, number_of_words_per_topic):
+def import_topic_model(combined_STOA_technologies_saved_topic_model, df):
     
-    if Import_existing_model == True:
-    
-        imported_data = combined_STOA_technologies_saved_topic_model
-        model_and_vectorized_data = imported_data[0]
-        df_with_topics = create_df_with_topics(df, model_and_vectorized_data[0], model_and_vectorized_data[1], imported_data[2])
-        topics = imported_data [3]
-        dict_anchor_words = imported_data[1]
+    imported_data = combined_STOA_technologies_saved_topic_model
+    model_and_vectorized_data = imported_data[0]
+    df_with_topics = create_df_with_topics(df, model_and_vectorized_data[0], model_and_vectorized_data[1], imported_data[2])
+    topics = imported_data [3]
+    dict_anchor_words = imported_data[1]
 
-        results_import = [df_with_topics, topics, dict_anchor_words]
-        return(results_import)
+    results_import = [df_with_topics, topics, dict_anchor_words]
+    return(results_import)
     
