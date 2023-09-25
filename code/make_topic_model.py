@@ -49,7 +49,7 @@ def vectorize(df):
 
     vectorizer = vectorizer.fit(df['text_tagged'])
     tfidf = vectorizer.transform(df['text_tagged'])
-    vocab = vectorizer.get_feature_names()
+    vocab = vectorizer.get_feature_names_out()
     vectorized_data = [vectorizer, tfidf, vocab]
     
     return vectorized_data
